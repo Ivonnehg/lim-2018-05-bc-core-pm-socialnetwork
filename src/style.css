@@ -5,13 +5,22 @@
 body {
     font-family: Myriad Pro;
 }
+
+
 .hidden {
     display:none;
 }
+
+nav{
+    position: fixed;
+    color: #554E4E;
+}
+
+
 .container {
-    padding: 5%;
-    border: 1px solid #B1EAC8;
-   margin: 30%;
+    padding: 0%;
+    width: 50%
+
 }
 
 .btnlogin{
@@ -27,10 +36,12 @@ body {
 #signinbtn,
 #btnUpdate,
 #btnDelete,
-#btnPost {
+#btnPost,
+#btnlike {
     background-color: #B1EAC8;
-    color: #444;
+    color: #554E4E;
     border: 1px solid #B1EAC8;
+    margin: 2%;
 }
 
 #btnFacebook{
@@ -44,7 +55,7 @@ body {
 #btnGoogle{
     display: inline-block;
     background: white;
-    color: #444;
+    color: #554E4E;
     width: 250px;
     height: 40px;
     border-radius: 5px;
@@ -56,9 +67,43 @@ body {
     background-color: #B1EAC8;
     display: flex;
     justify-content: flex-end;
+  
 }
 
-.col s12 m4 l3 {
-    padding: 0%
+.sidebar{
+    height:100%;
+    width:200px;
+    background-color:#fff;
+    position:fixed!important;
+    z-index:1;
+    overflow:auto;
 }
 
+.row,
+.col s12 m6 offset-m3{
+    width: 120%;
+    padding: 0%;
+    margin: 0%;
+}
+
+#wall
+#post{
+    width: 100%;
+    padding: 0%;
+    margin: 0%;
+}
+
+.dropdown-trigger{
+    color: #554E4E;
+    font-size: 15%
+}
+
+
+@media(max-width: 600 px) {
+    .row,
+    .col s12 m6 offset-m2{
+    width: 80%;
+    padding: 0%;
+    margin: 0%;
+}
+}

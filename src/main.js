@@ -1,6 +1,8 @@
+
 const login = document.getElementById("login");
 const logout = document.getElementById("logout")
 const btnLogOut = document.getElementById("btnLogout");
+const btnLogout2 = document.getElementById("btnLogout2");
 const btnSignIn = document.getElementById("signinbtn");
 const register = document.getElementById("register");
 const name = document.getElementById("name");
@@ -17,16 +19,17 @@ const posts = document.getElementById("posts");
 const username = document.getElementById("user-name");
 const logo = document.getElementById("logo");
 const navbar = document.getElementById("navbar");
-
+const sideBar = document.getElementById("side-bar");
+let checkBox = document.getElementById("check-box");
+const private = document.getElementById("private")
 // creando objeto que contiene la data del post
 
 
 $(document).ready(function(){
     $('.collapsible').collapsible();
-    $('.sidenav').sidenav();
     $(".dropdown-trigger").dropdown();
-  });
 
+  });
 
 
 btnPost.addEventListener('click', () => {
@@ -124,7 +127,8 @@ function crearElementos(userId, newPost, texto){
     btnDelete.setAttribute("value", "Delete");
     btnDelete.setAttribute("type", "button");
     btnDelete.setAttribute("id", "btnDelete");
-    btnDelete.setAttribute("class", "btn waves-effect waves-light");
+    btnDelete.setAttribute("class", "btn modal-trigger");
+    btnDelete.setAttribute("data-target", "modal1");
     var btnlike = document.createElement("input");
     btnlike.setAttribute("value", "like");
     btnlike.setAttribute("type", "button");
@@ -145,7 +149,7 @@ function crearElementos(userId, newPost, texto){
         //window.btnDelete(post.id)
         console.log("post a eliminar", post);
         deletePost(textPost.id,userId);
-        reload_page();
+       
         }
         else {
          ;

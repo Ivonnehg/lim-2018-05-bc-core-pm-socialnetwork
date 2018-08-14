@@ -13,24 +13,24 @@ firebase.initializeApp(config);
 window.onload = () => {
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
+         
             login.classList.add("hidden");
-            // logout.classList.remove("hidden");
             wall.classList.remove("hidden");
             posts.classList.remove("hidden");
-            // username.innerHTML = `Bienvenida ${user.displayName}`;
             logo.classList.add("hidden");
             navbar.classList.remove("hidden");
+            sideBar.classList.remove("hidden")
             console.log("Usuario logueado");
             console.log(user.uid);
             loadData(user.uid);
         } else {
             console.log("No esta logueado")
             login.classList.remove("hidden");
-            // logout.classList.add("hidden");
             wall.classList.add("hidden");
             posts.classList.add("hidden");
             logo.classList.remove("hidden");
             navbar.classList.add("hidden");
+            sideBar.classList.add("hidden")
         }
     });
 }
@@ -58,12 +58,13 @@ window.writeUserData = (userId, name, email, imageUrl) => {
     });
 }
 
-window.writeNewPost = (uid, body) => {
+window.writeNewPost = (uid, body, likes) => {
     // A post entry.
     var postData = {
         uid: uid,
         body: body,
         likes: 0
+    
     };
 
     // genera un id para la publicacion

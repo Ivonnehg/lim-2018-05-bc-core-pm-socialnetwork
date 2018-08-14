@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Social Network</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
     <link rel="stylesheet" href="css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 </head>
@@ -15,17 +15,17 @@
 
     <ul id="dropdown1" class="dropdown-content">
         <li>
-            <a href="#!">Farmacologia</a>
+            <a href="#!">Cuenta</a>
         </li>
         <li>
-            <a href="#!">Material Educativo</a>
+            <a href="#!">Privacidad</a>
         </li>
         <li class="divider"></li>
         <li>
-            <a href="#!">Articulos</a>
+            <a href="#!">Configuracion</a>
         </li>
         <li>
-            <a href="#!">Debates</a>
+            <a href="#!">Ayuda</a>
         </li>
     </ul>
     <nav>
@@ -35,15 +35,16 @@
             </a>
             <ul class="right hide-on-med-and-down">
                 <li>
-                    <a href="sass.html">Colegas</a>
+                    <i class="material-icons right">account_circle</i>
                 </li>
                 <li>
-                    <a href="badges.html">Cuenta</a>
+
                 </li>
                 <!-- Dropdown Trigger -->
                 <li>
-                    <a class="dropdown-trigger" href="#!" data-target="dropdown1">Ver mas
-                        <i class="material-icons right">arrow_drop_down</i>
+                    <a class="dropdown-trigger" href="#!" data-target="dropdown1">
+                        <i class="material-icons right">settings</i>
+
                     </a>
                 </li>
                 <li id="btnLogout">Cerrar Sesion</li>
@@ -68,38 +69,77 @@
             </li>
         </ul>
 
-        <li id="btnLogout">Cerrar Sesion</li>
+        <li id="btnLogout2">Cerrar Sesion</li>
     </ul>
 </header>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
 
 <body>
+    <div class="hide-on-small-only">
+        <div class="hidden" id="side-bar">
+            <div class="sidebar">
 
-
-
-    <div class="row">
-        <div class="hide-on-small-only">
-            <div class="col s12 m3 l2">
-                <div class="card">
-                    <div class="card-image">
-                        <img src="images/farmacos.png">
-                        <a class="btn-floating halfway-fab waves-effect waves-light red">
-                            <i class="material-icons">add</i>
-                        </a>
+                <div class="col s12 m3 l5">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="images/charla.jpg">
+                            <a class="btn-floating halfway-fab waves-effect waves-light red">
+                                <i class="material-icons">add</i>
+                            </a>
+                        </div>
+                        <div class="card-content">
+                            <p>Comparte tus casos con la comunidad medica</p>
+                        </div>
                     </div>
-                    <div class="card-content">
-                        <p>Lee los ultimos articulos farmacologicos</p>
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="images/farmacos.png">
+                            <a class="btn-floating halfway-fab waves-effect waves-light red">
+                                <i class="material-icons">add</i>
+                            </a>
+                        </div>
+                        <div class="card-content">
+                            <p>Lee los ultimos articulos farmacologicos</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="images/students.jpg">
+                            <a class="btn-floating halfway-fab waves-effect waves-light red">
+                                <i class="material-icons">add</i>
+                            </a>
+                        </div>
+                        <div class="card-content">
+                            <p>Encuentra y comparte informacion con otros estudiantes</p>
+                        </div>
                     </div>
                 </div>
+                <div class="card">
+                        <div class="card-image">
+                            <img src="images/students.jpg">
+                            <a class="btn-floating halfway-fab waves-effect waves-light red">
+                                <i class="material-icons">add</i>
+                            </a>
+                        </div>
+                        <div class="card-content">
+                            <p>Encuentra y comparte informacion con otros estudiantes</p>
+                        </div>
+                    </div>
             </div>
         </div>
+    </div>
 
 
-        <div class="col s12 m8 l9">
-            <!-- Note that "m8 l9" was added -->
 
-            <div class="container">
+
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m6 l6 offset-m2">
                 <div class="hidden" id="logo">
                     <img class="responsive-img" src="images/logo.jpg" alt="Imagen no cargo">
                 </div>
@@ -159,33 +199,27 @@
 
 
                 <div id="wall" class="hidden">
+                    <p id="user-name"></p>
+                    <label class="switch" id="check-box">
+                            <input type="checkbox">
+                            <span> Privado</span>
+                          </label>
                     <textarea name="Publicacion" id="post" cols="30" rows="10"></textarea>
                     <br>
                     <a class="waves-effect waves-light btn" id="btnPost">Publicar</a>
                 </div>
                 <div id="posts" class="hidden">
-                    <h3>
+                    <h4>
                         Publicaciones
-                    </h3>
+                    </h4>
+                   
                 </div>
-
 
             </div>
         </div>
-        <div class="row">
-            <div class="col s12 m3 l2">
-              <div class="card">
-                <div class="card-image">
-                  <img src="images/charla.jpg">
-                  <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
-                </div>
-                <div class="card-content">
-                  <p>Comparte tus casos con la comunidad medica</p>
-                </div>
-              </div>
-            </div>
-          </div>
     </div>
+
+
 
 
     <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>

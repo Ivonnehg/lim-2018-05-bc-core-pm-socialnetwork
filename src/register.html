@@ -1,31 +1,156 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Registro</title>
+    <title>Social Network</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/materialize.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
 </head>
-<body>
-    <h2>Formulario de Registro</h2>
-    <form>
-        Nombres: <br>
-        <input type="text" id="Nombres"><br>
-        Apellidos: <br>
-        <input type="text" id="Apellidos"><br>
-        Fecha de Nacimiento: <br>
-        <input type="date" name="birthDate" id="birth-date"><br>
-        Email:<br>
-        <input type="email" id="email"><br>
-        Pais:<br>
-        <input type="text"><br>
-        Ciudad: <br>
-        <input type="text"><br>
+<header id="navbar">
+        <ul id="dropdown1" class="dropdown-content">
+                <li>
+                    <a href="#!">Cuenta</a>
+                </li>
+                <li>
+                    <a href="#!">Privacidad</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a href="#!">Configuracion</a>
+                </li>
+                <li>
+                    <a href="#!">Ayuda</a>
+                </li>
+            </ul>
+            <nav>
+                <div class="nav-wrapper">
+                    <a href="#" data-target="mobile-demo" class="sidenav-trigger">
+                        <i class="material-icons">menu</i>
+                    </a>
+                    <ul class="right hide-on-med-and-down">
+                        <li>
+                                <i class="material-icons right">account_circle</i>
+                        </li>
+                        <li>
+                                
+                        </li>
+                        <!-- Dropdown Trigger -->
+                        <li>
+                            <a class="dropdown-trigger" href="#!" data-target="dropdown1">
+                                <i class="material-icons right">settings</i>
+        
+                            </a>
+                        </li>
+                        <li id="btnLogout">Cerrar Sesion</li>
+                    </ul>
+                </div>
+            </nav>
+        
+            <ul class="sidenav" id="mobile-demo">
+                <ul id="dropdown1" class="dropdown-content">
+                    <li>
+                        <a href="#!">Farmacologia</a>
+                    </li>
+                    <li>
+                        <a href="#!">Material Educativo</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#!">Articulos</a>
+                    </li>
+                    <li>
+                        <a href="#!">Debates</a>
+                    </li>
+                </ul>
+        
+                <li id="btnLogout2">Cerrar Sesion</li>
+            </ul>
+        </header>
+        <br>
+        <br>
+        <br>
+        <br><br>
+        <br>
+        <body>
+                <div class = "hide-on-small-only">
+            <div  id="side-bar">
+                <div class="sidebar">
+                     
+                    <div class="col s12 m3 l2">
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="images/charla.jpg">
+                                <a class="btn-floating halfway-fab waves-effect waves-light red">
+                                    <i class="material-icons">add</i>
+                                </a>
+                            </div>
+                            <div class="card-content">
+                                <p>Comparte tus casos con la comunidad medica</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="images/farmacos.png">
+                                <a class="btn-floating halfway-fab waves-effect waves-light red">
+                                    <i class="material-icons">add</i>
+                                </a>
+                            </div>
+                            <div class="card-content">
+                                <p>Lee los ultimos articulos farmacologicos</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                                <div class="card-image">
+                                    <img src="images/students.jpg">
+                                    <a class="btn-floating halfway-fab waves-effect waves-light red">
+                                        <i class="material-icons">add</i>
+                                    </a>
+                                </div>
+                                <div class="card-content">
+                                    <p>Encuentra y comparte informacion con otros estudiantes</p>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
-    </form>
+
+
+
+    <div class="container">
+        <div class="profile-pic">
+                <img class="circle" src="images/yuna.jpg">
+                <div id="wall">
+                        <textarea name="Publicacion" id="post" cols="30" rows="10"></textarea>
+                        <br>
+                        <a class="waves-effect waves-light btn" id="btnPost">Publicar</a>
+                    </div>
+                    <div id="posts">
+                        <h3>
+                            Publicaciones
+                        </h3>
+                    </div>
+        </div>
+            
+    </div>
+
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
+    <script src="firebase.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/materialize.min.js"></script>
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="main.js"></script>
+    <script src="data.js"></script>
 </body>
-<script src="main.js"></script>
+
 </html>
