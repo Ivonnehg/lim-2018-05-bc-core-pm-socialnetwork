@@ -21,6 +21,8 @@ window.onload = () => {
             logo.classList.add("hidden");
             navbar.classList.remove("hidden");
             console.log("Usuario logueado");
+            console.log(user.uid);
+            loadData(user.uid);
         } else {
             console.log("No esta logueado")
             login.classList.remove("hidden");
@@ -33,6 +35,19 @@ window.onload = () => {
     });
 }
 
+
+window.loadData = (userId) => {
+    console.log('entra a loadData de '+userId);
+    firebase.database().ref('user-posts/'+userId).on('child_added',function(snapshot){
+
+        var post = snapshot.val().body;
+        var idPost = snapshot.val().id;
+
+        crearElementos(userId,idPost,post);        
+
+    });
+
+}
 
 window.writeUserData = (userId, name, email, imageUrl) => {
     firebase.database().ref('users/' + userId).set({
@@ -48,7 +63,7 @@ window.writeNewPost = (uid, body) => {
     var postData = {
         uid: uid,
         body: body,
-
+        likes: 0
     };
 
     // genera un id para la publicacion
@@ -57,23 +72,26 @@ window.writeNewPost = (uid, body) => {
     // Registrar en el objeto posts y user-post la nueva publicación
     var updates = {};
     postData.id = newPostKey;
+    
     updates['/posts/' + newPostKey] = postData;
     updates['/user-posts/' + postData.uid + '/' + newPostKey] = postData;
+    
 
     firebase.database().ref().update(updates);
     return newPostKey
 
 }
-//función de editar post
 
 
 
 //funcion para eliminar posts
-window.btnDelete = (contPost) => {
+window.deletePost = (contPost,userId) => {
+    //alert('hola ' + contPost); return false;
     console.log("userId", userId)
     console.log("contPost", contPost)
     firebase.database().ref().child('/user-posts/' + userId + '/' + contPost).remove();
     firebase.database().ref().child('posts/' + contPost).remove();
 }
+
 
 

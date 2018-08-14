@@ -20,17 +20,6 @@ const navbar = document.getElementById("navbar");
 
 // creando objeto que contiene la data del post
 
-let postData = {
-    uid: null,
-    title: null,
-    image: null,
-    content: null,
-    date: null,
-    category: null,
-    state: null,
-    likes: null,
-    comentary: null
-  };
 
 $(document).ready(function(){
     $('.collapsible').collapsible();
@@ -48,59 +37,8 @@ btnPost.addEventListener('click', () => {
     else{
     let userId = firebase.auth().currentUser.uid;
     const newPost = writeNewPost(userId, post.value);
-  
-
-    var btnUpdate = document.createElement("input");
-    btnUpdate.setAttribute("value", "Update");
-    btnUpdate.setAttribute("type", "button");
-    btnUpdate.setAttribute("id", "btnUpdate");
-    btnUpdate.setAttribute("class", "btn waves-effect waves-light");
-    var btnDelete = document.createElement("input");
-    btnDelete.setAttribute("value", "Delete");
-    btnDelete.setAttribute("type", "button");
-    btnDelete.setAttribute("id", "btnDelete");
-    btnDelete.setAttribute("class", "btn waves-effect waves-light");
-
-    var contPost = document.createElement('div');
-    var textPost = document.createElement('textarea')
-    textPost.setAttribute("id", newPost);
-
-    textPost.innerHTML = post.value;
-
-    btnDelete.addEventListener('click', () => {        
-        
-        while (contPost.firstChild) contPost.removeChild(contPost.firstChild);
-
-        M.toast({html: 'Tu publicacion ha sido eliminada'})
-        //window.btnDelete(post.id)
-        console.log("post a eliminar", post)
-        reload_page();
-
-    });
-
-    btnUpdate.addEventListener('click', () => {
-        console.log("diste click");
-        
-        const newUpdate = document.getElementById(newPost);
-        const nuevoPost = {
-            body: newUpdate.value,
-        };
-
-        var updatesUser = {};
-        var updatesPost = {};
-
-        updatesUser['/user-posts/' + userId + '/' + newPost] = nuevoPost;
-        updatesPost['/posts/' + newPost] = nuevoPost;
-
-        firebase.database().ref().update(updatesUser);
-        firebase.database().ref().update(updatesPost);
-
-    });
-
-    contPost.appendChild(textPost);
-    contPost.appendChild(btnUpdate);
-    contPost.appendChild(btnDelete);
-    posts.appendChild(contPost);
+    //crearElementos(userId,post.value);
+//,newPost
 }})
 
 register.addEventListener("click", () => {
@@ -173,4 +111,108 @@ btnFacebook.addEventListener("click", () => {
         });
 })
 
+
+function crearElementos(userId, newPost, texto){
+    //console.log('entra a crear');
+    
+    var btnUpdate = document.createElement("input");
+    btnUpdate.setAttribute("value", "Update");
+    btnUpdate.setAttribute("type", "button");
+    btnUpdate.setAttribute("id", "btnUpdate");
+    btnUpdate.setAttribute("class", "btn waves-effect waves-light");
+    var btnDelete = document.createElement("input");
+    btnDelete.setAttribute("value", "Delete");
+    btnDelete.setAttribute("type", "button");
+    btnDelete.setAttribute("id", "btnDelete");
+    btnDelete.setAttribute("class", "btn waves-effect waves-light");
+    var btnlike = document.createElement("input");
+    btnlike.setAttribute("value", "like");
+    btnlike.setAttribute("type", "button");
+    btnlike.setAttribute("id", "btnlike");
+    btnlike.setAttribute("class", "btn waves-effect waves-light");
+
+    var contPost = document.createElement('div');
+    var textPost = document.createElement('textarea')
+    textPost.setAttribute("id", newPost);
+
+    textPost.innerHTML = texto;
+
+    btnDelete.addEventListener('click', () => {        
+        const opcion = confirm("Estas seguro que deseas eliminar este post");
+        if (opcion == true) {
+        while (contPost.firstChild) contPost.removeChild(contPost.firstChild);
+        M.toast({html: 'Tu publicacion ha sido eliminada'})
+        //window.btnDelete(post.id)
+        console.log("post a eliminar", post);
+        deletePost(textPost.id,userId);
+        reload_page();
+        }
+        else {
+         ;
+          }
+    });
+
+    btnUpdate.addEventListener('click', () => {
+        console.log("diste click " + newPost);
+        
+        const newUpdate = document.getElementById(newPost);
+        const nuevoPost = {
+            body: newUpdate.value
+        };
+
+        firebase.database().ref('/user-posts/' + userId + '/' + newPost).update(nuevoPost);
+        firebase.database().ref('/posts/' + newPost).update(nuevoPost);
+
+    });
+
+    btnlike.addEventListener('click', () => {
+        console.log("diste click");
+        
+        //const newUpdate = document.getElementById(newPost);
+        const nuevoLike = {
+          
+        };       
+       //agregar idusuario como clave dinamica
+        nuevoLike[userId] = 1;
+
+        firebase.database().ref('posts/' + newPost+"/likes/"+userId).once("value")
+        .then(function(snapshot){//evalua si existe la ruta y lo devuelve
+
+            if(snapshot.exists()){//metodo exists
+                console.log("ya tiene like");
+                //si el like del usuario ya existe lo elimina 
+                firebase.database().ref().child('/user-posts/' + userId + '/' + newPost+"/likes/"+userId).remove();
+                firebase.database().ref().child('posts/' + newPost+"/likes/"+userId).remove();
+                btnlike.style.backgroundColor = "grey";
+                
+                   
+            return false;
+            }else{
+                console.log("no tiene like");
+               //insertar like del usuario
+        firebase.database().ref('/user-posts/' + userId + '/' + newPost+"/likes").update(nuevoLike);
+        firebase.database().ref('/posts/' + newPost+"/likes").update(nuevoLike);
+        btnlike.style.backgroundColor = "green";
+                    var contador = 0;
+                    document.getElementById("btnlike").onclick = function(){
+                        contador++;
+                        alert(contador);
+                    
+                }
+           // return false;
+            }
+            
+        });
+
+       
+
+    });
+
+    contPost.appendChild(textPost);
+    contPost.appendChild(btnUpdate);
+    contPost.appendChild(btnDelete);
+    contPost.appendChild(btnlike);
+    posts.appendChild(contPost);
+
+}
 
