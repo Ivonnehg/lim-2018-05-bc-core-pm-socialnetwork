@@ -9,11 +9,44 @@ var config = {
 };
 firebase.initializeApp(config);
 
+window.loadDataMuro = (userId) => {
+    console.log('entra a loadData de ' + userId);
+    firebase.database().ref('user-posts/' + userId).on('child_added', function (snapshot) {
+
+        console.log(snapshot.val())
+        var post = snapshot.val().body;
+        var idPost = snapshot.val().id;
+        //llamar funcion elementos
+        crearElementos(userId, idPost, post);
+        
+    });
+
+}
+
+window.loadDataPublic = () => {
+
+  
+
+    var ref = firebase.database().ref("posts");
+    ref.orderByChild("status").equalTo('public').on("child_added", function (snapshot) {
+        console.log(snapshot.val());
+        var post = snapshot.val().body;
+        var idPost = snapshot.val().id;
+        const userId = snapshot.val().uid;
+        crearElementos(userId, idPost, post);
+    });
+   
+}
+
+let userId=null;
+
 
 window.onload = () => {
+
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
-         
+            userId= user.uid;
+            console.log(user.uid)
             login.classList.add("hidden");
             wall.classList.remove("hidden");
             posts.classList.remove("hidden");
@@ -22,7 +55,10 @@ window.onload = () => {
             sideBar.classList.remove("hidden")
             console.log("Usuario logueado");
             console.log(user.uid);
-            loadData(user.uid);
+            //loadData(user.uid);
+            posts.innerHTML=''//para q borre y pinte lo q haya
+            loadDataPublic()
+            
         } else {
             console.log("No esta logueado")
             login.classList.remove("hidden");
@@ -33,38 +69,72 @@ window.onload = () => {
             sideBar.classList.add("hidden")
         }
     });
-}
-
-
-window.loadData = (userId) => {
-    console.log('entra a loadData de '+userId);
-    firebase.database().ref('user-posts/'+userId).on('child_added',function(snapshot){
-
-        var post = snapshot.val().body;
-        var idPost = snapshot.val().id;
-
-        crearElementos(userId,idPost,post);        
-
-    });
 
 }
 
-window.writeUserData = (userId, name, email, imageUrl) => {
+
+//cargar post publicos
+const btnPostsPublic = document.getElementById('publico')
+btnPostsPublic.addEventListener('click', () => {
+    console.log('hola')
+    posts.innerHTML=''
+    loadDataPublic()
+})
+
+const btnPostsMuro= document.getElementById('muro')
+btnPostsMuro.addEventListener('click', () => {
+    console.log('hola')
+    posts.innerHTML=''
+    loadDataMuro(userId)
+})
+
+
+
+//cargar datos 
+
+
+
+
+
+//llamar datos post privados
+// const returnData=(uid)=>{
+//     const userUbicacion=firebase.database().ref('users').child(uid);
+//     userUbicacion.on('value', snap=>{
+
+//     const nameUserId=snap.val().userNickName;
+//     userName.innerHTML=`Bienvenida ${nameUserId}`;    
+//     })
+
+//     const postUbicacion= firebase.database().ref(user-posts).child(uid);
+//     postUbicacion.on("child_added", snap=>{
+//         const key= snap.val().key;
+//         const listPost=snap.val().body;
+
+//         showData(uid,key,listPost,nameUserId);
+//     });
+// }
+
+//pintar datos post privados
+
+window.writeUserData = (userId, name, nickName, email, imageUrl) => {
     firebase.database().ref('users/' + userId).set({
         username: name,
+        userNickName: NickName,
         email: email,
         profile_picture: imageUrl,
         displayName: name
     });
 }
 
-window.writeNewPost = (uid, body, likes) => {
+window.writeNewPost = (uid, body, status) => {
     // A post entry.
-    var postData = {
+    let postData = {
         uid: uid,
         body: body,
-        likes: 0
-    
+        likes: 0,
+        status: status
+
+
     };
 
     // genera un id para la publicacion
@@ -73,10 +143,10 @@ window.writeNewPost = (uid, body, likes) => {
     // Registrar en el objeto posts y user-post la nueva publicación
     var updates = {};
     postData.id = newPostKey;
-    
+
     updates['/posts/' + newPostKey] = postData;
     updates['/user-posts/' + postData.uid + '/' + newPostKey] = postData;
-    
+
 
     firebase.database().ref().update(updates);
     return newPostKey
@@ -85,14 +155,17 @@ window.writeNewPost = (uid, body, likes) => {
 
 
 
+
+
 //funcion para eliminar posts
-window.deletePost = (contPost,userId) => {
+window.deletePost = (contPost, userId) => {
     //alert('hola ' + contPost); return false;
     console.log("userId", userId)
     console.log("contPost", contPost)
     firebase.database().ref().child('/user-posts/' + userId + '/' + contPost).remove();
     firebase.database().ref().child('posts/' + contPost).remove();
 }
-
-
-
+window.updatePost = (userId, newPost, nuevoPost) => {
+    firebase.database().ref('/user-posts/' + userId + '/' + newPost).update(nuevoPost);
+    firebase.database().ref('/posts/' + newPost).update(nuevoPost);
+}

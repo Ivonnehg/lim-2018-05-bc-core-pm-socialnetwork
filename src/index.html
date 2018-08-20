@@ -15,10 +15,10 @@
 
     <ul id="dropdown1" class="dropdown-content">
         <li>
-            <a href="#!">Cuenta</a>
+            <a id="publico">Publico</a>
         </li>
         <li>
-            <a href="#!">Privacidad</a>
+            <a id="muro">Muro</a>
         </li>
         <li class="divider"></li>
         <li>
@@ -200,18 +200,24 @@
 
                 <div id="wall" class="hidden">
                     <p id="user-name"></p>
-                    <label class="switch" id="check-box">
-                            <input type="checkbox">
+                    <label class="switch" >
+                            <input type="checkbox" id="btnprivate">
                             <span> Privado</span>
                           </label>
+                          <label class="switch" >
+                            <input type="checkbox" id="btnpublic">
+                            <span> Publico</span>
+                          </label>
+                          
+
                     <textarea name="Publicacion" id="post" cols="30" rows="10"></textarea>
                     <br>
                     <a class="waves-effect waves-light btn" id="btnPost">Publicar</a>
                 </div>
                 <div id="posts" class="hidden">
-                    <h4>
+                    <h3>
                         Publicaciones
-                    </h4>
+                    </h3>
                    
                 </div>
 
