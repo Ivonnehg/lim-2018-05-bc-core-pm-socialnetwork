@@ -101,12 +101,12 @@ lineamientos propuestos en el diseño de la interfaz de usuario.
 
 ## Firebase
 
-Para registrar a los usuarios usamos Firebase para obtener la base de datos y autenticación. 
+Para registrar a los usuarios, realizar posts, likear posts, eliminar, realizar posts modo muro y publico usamos Firebase asímismo para obtener la base de datos y autenticación. 
 
 A través de la documentación que se encuentra en la página web de Firebase, hemos podido implementarlo en nuestro código.
 
 #### Test
-Pendiente
+Pendiente en rellenar conclusiones.
 
 
 #### Metodología y organización

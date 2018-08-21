@@ -98,6 +98,12 @@ nav{
     font-size: 15%
 }
 
+.textPublic{
+    padding: 5px;
+    width: 100%;
+    border: 1px solid #dfdcdc;
+    margin: 10px 0 10px 0px;
+}
 
 @media(max-width: 600 px) {
     .row,
