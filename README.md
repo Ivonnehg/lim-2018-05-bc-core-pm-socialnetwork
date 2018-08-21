@@ -12,8 +12,7 @@ Una red social está conformado por un conjunto de equipos, servidores, programa
 
 La estructura básica de las redes sociales son dos partes principalmente, los nodos y las conexiones. Los nodos vendrían a ser las personas y las conexiones serían las interacciones que hay entre ellas y en eso nos basamos para comenzar a investigar qué cosas ya existían en el mercado y que cosas podríamos ofrecer nosotras para hacer la diferencia.
 
-
-Después de investigar un poco sobre los distintos rubros llegamos a la conclusión que no habían muchas redes sociales en el rubro de la medicina, y las que hay no son muy variadas ni ofrecen mucha conexión entre usuarios, más que ciertos comentarios u opiniones sueltas. Es por eso que los principales usuarios de la red social que planteamos, serían los médicos y estudiantes de medicina que tienen interés en interactuar con sus pares e intercambiar conocimientos.
+Después de investigar un poco sobre los distintos rubros llegamos a la conclusión que no habían muchas redes sociales en el rubro de la medicina por tal motivo fue que nos inclinamos a este ámbito, las redes sociales que hay referente a este contexto no son muy variadas ni ofrecen mucha conexión entre usuarios, más que ciertos comentarios u opiniones sueltas.
 
 #### Benchmark
 
@@ -25,6 +24,9 @@ Dentro del benchmarking que hicimos, encontramos 3 grandes redes medicas: Sermo,
 
 - Medscape es bastante parecida a Esanum, pero a diferencia de las otras, no pide alguna validación de la profesión, también sirve para leer artículos y valoraciones.
 De las tres grandes redes revisadas, solo Sermo es responsive. También pudimos revisar páginas pequeñas pero son más que todo para intercambio de información, no son muy vistosas ni atractivas y tampoco amigables con dispositivos móviles.
+
+ Es por eso que los principales usuarios de la red social que planteamos, serían los médicos y estudiantes de medicina que tienen interés en interactuar con sus pares e intercambiar conocimientos.
+
 
 Como primer paso aplicamos encuestas para tener una idea de que porcentaje de médicos estarían interesados en participar en una red social de este tipo. Arrojando los siguientes resultados.
 
@@ -66,6 +68,7 @@ Para verificar que el producto está resolviendo las necesidades del usuario hic
 
 ## Proceso de diseño
 
+#### Prototipo de baja fidelidad
 Despues de definir nuestro producto luego de analizar los resultados de las encuestas, entrevistas y las ideas que queriamos llevar a cabo, comenzamos a elaborar distintas vistas en prototipos de baja fidelidad como en las imagenes que se muestra a continuación.
 
   ![Imagen 2][2] ![Imagen 3][3] ![Imagen 4][4] ![Imagen 5][5] ![Imagen 6][6]
@@ -108,4 +111,4 @@ Pendiente
 
 #### Metodología y organización
 
-Usamos la metodología ágil Scrum para desarrollar este producto en base a springs. Utilizamos Trello (Kambat) para la organización.
+Para la organcizaciòn y el planeamiento de este proyecto usamos la metodología ágil Scrum para desarrollar este producto en base a springs. Utilizamos Trello (Kambat).

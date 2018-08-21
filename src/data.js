@@ -10,30 +10,24 @@ var config = {
 firebase.initializeApp(config);
 
 window.loadDataMuro = (userId) => {
-    console.log('entra a loadData de ' + userId);
+    //console.log('entra a loadData de ' + userId);
     firebase.database().ref('user-posts/' + userId).on('child_added', function (snapshot) {
-
-        console.log(snapshot.val())
+        //console.log(snapshot.val())
         var post = snapshot.val().body;
         var idPost = snapshot.val().id;
         //llamar funcion elementos
-        crearElementos(userId, idPost, post);
-        
+        crearElementos(userId, idPost, post);     
     });
-
 }
 
 window.loadDataPublic = () => {
-
-  
-
     var ref = firebase.database().ref("posts");
     ref.orderByChild("status").equalTo('public').on("child_added", function (snapshot) {
-        console.log(snapshot.val());
+        //console.log(snapshot.val());
         var post = snapshot.val().body;
         var idPost = snapshot.val().id;
         const userId = snapshot.val().uid;
-        crearElementos(userId, idPost, post);
+        crearElementosPublic(userId, idPost, post);
     });
    
 }
@@ -48,7 +42,7 @@ window.onload = () => {
             userId= user.uid;
             console.log(user.uid)
             login.classList.add("hidden");
-            wall.classList.remove("hidden");
+            //wall.classList.remove("hidden");
             posts.classList.remove("hidden");
             logo.classList.add("hidden");
             navbar.classList.remove("hidden");
@@ -73,48 +67,26 @@ window.onload = () => {
 }
 
 
-//cargar post publicos
+
 const btnPostsPublic = document.getElementById('publico')
 btnPostsPublic.addEventListener('click', () => {
     console.log('hola')
-    posts.innerHTML=''
-    loadDataPublic()
+    //posts.innerHTML='';
+    //document.getElementById('wall').style.display = 'none';
+    //muro = 0;
+    //console.log('public: ' + muro);
+    //loadDataPublic();
+    location.reload();
 })
 
 const btnPostsMuro= document.getElementById('muro')
 btnPostsMuro.addEventListener('click', () => {
     console.log('hola')
-    posts.innerHTML=''
+    posts.innerHTML='';
+    document.getElementById('wall').style.display = 'block';
     loadDataMuro(userId)
 })
 
-
-
-//cargar datos 
-
-
-
-
-
-//llamar datos post privados
-// const returnData=(uid)=>{
-//     const userUbicacion=firebase.database().ref('users').child(uid);
-//     userUbicacion.on('value', snap=>{
-
-//     const nameUserId=snap.val().userNickName;
-//     userName.innerHTML=`Bienvenida ${nameUserId}`;    
-//     })
-
-//     const postUbicacion= firebase.database().ref(user-posts).child(uid);
-//     postUbicacion.on("child_added", snap=>{
-//         const key= snap.val().key;
-//         const listPost=snap.val().body;
-
-//         showData(uid,key,listPost,nameUserId);
-//     });
-// }
-
-//pintar datos post privados
 
 window.writeUserData = (userId, name, nickName, email, imageUrl) => {
     firebase.database().ref('users/' + userId).set({
