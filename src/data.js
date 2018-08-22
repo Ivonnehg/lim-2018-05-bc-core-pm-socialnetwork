@@ -91,7 +91,7 @@ btnPostsMuro.addEventListener('click', () => {
 window.writeUserData = (userId, name, nickName, email, imageUrl) => {
     firebase.database().ref('users/' + userId).set({
         username: name,
-        userNickName: NickName,
+        userNickName: nickName,
         email: email,
         profile_picture: imageUrl,
         displayName: name
