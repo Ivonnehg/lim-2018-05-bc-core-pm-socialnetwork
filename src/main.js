@@ -88,13 +88,20 @@ btnSignIn.addEventListener("click", () => {
     console.log("hola")
     firebase.auth().signInWithEmailAndPassword(emailSigned.value, passwordSigned.value)
 
-        .then(function () {
+        .then(function (result) {
             console.log("Inicia sesion");
             let user = result.user;
-            writeUserData(user.uid, user.displayName, user.email, user.photoURL)
+            writeUserData(user.uid, user.displayName, '', user.email, user.photoURL)
         })
         .catch(function (error) {
             console.log(error.code, error.message);
+            let errorCode = error.code;
+            if (errorCode === 'auth/wrong-password') {
+                alert('Contraseña incorrecta.');
+              }
+              else {
+                alert('Usuario o contraseña incorrecto');
+              }
         });
         
 })

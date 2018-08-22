@@ -28,7 +28,7 @@ De las tres grandes redes revisadas, solo Sermo es responsive. También pudimos 
  Es por eso que los principales usuarios de la red social que planteamos, serían los médicos y estudiantes de medicina que tienen interés en interactuar con sus pares e intercambiar conocimientos.
 
 
-Como primer paso aplicamos encuestas para tener una idea de que porcentaje de médicos estarían interesados en participar en una red social de este tipo. Arrojando los siguientes resultados.
+Como primer paso para definir el producto aplicamos encuestas para tener una idea de que porcentaje de médicos estarían interesados en participar en una red social de este tipo. Arrojando los siguientes resultados.
 
 ![Imagen 1][1]
 
@@ -43,11 +43,27 @@ Después de eso, elegimos a unas cuantas personas, de las que habían respondido
 *  ¿Sueles compartir contenido? (¿Qué tipo de contenido?)
 *  En la encuesta que realizamos de manera virtual, nos contaste que te gustaría tener una red de médicos con los      cuales poder compartir información e intercambiar opiniones: 
 *  ¿Estás buscando alguna red social?
-*  ¿Te interesaría tener una red social en la cual puedas tener intercambios de opinión de manera anónima?
 *  Cuéntame sobre la última vez que encontraste una red (comunidad) médica a la que te uniste.
 *  En la actualidad, ¿para qué usas las redes sociales a las que estas subscrito?
 *  ¿Tienes algún problema/dificultad con las redes que usas?
 *  Si es así, ¿Cómo crees que podrían solucionarse esos problemas?
+
+#### Resumen de entrevistas/encuestas con usuarios:
+
+Los medicos entrevistados fueron 3 y estaban interesados en tener una red social en la que puedan tener intercambios de opinión de información médica actualizada, según las entrevistas los puntos de sumo interez son:
+
+- valoracion sobre farmacos nuevos
+- articulos sobre medicina natural
+- compartir casos clínicos 
+- compartir experiencias peculiares (positivas y negativas)
+
+El total de médicos encuestados fueron un total de 28 personas de los cuales:
+
+- El 100% de médicos encuestados/entrevistados les gustaría ayudar/inspirar a médicos jóvenes o en formación.
+
+- El 100% de los estudiantes de medicina encuestados desean contar con una red social donde puedan consultar fuentes de información y puedan    contar las dificultades que están teniendo.
+
+- el 33% de los médicos encuestados no cuentan con una red social médica dónde compartir encontrar información médica actualizada.
 
 #### Producto (detalles):
 
@@ -101,14 +117,29 @@ lineamientos propuestos en el diseño de la interfaz de usuario.
 
 ## Firebase
 
-Para registrar a los usuarios, realizar posts, likear posts, eliminar, realizar posts modo muro y publico usamos Firebase asímismo para obtener la base de datos y autenticación. 
+Para registrar a los usuarios usamos Firebase para obtener la base de datos y autenticación. 
 
 A través de la documentación que se encuentra en la página web de Firebase, hemos podido implementarlo en nuestro código.
-
-#### Test
-Pendiente en rellenar conclusiones.
-
 
 #### Metodología y organización
 
 Para la organcizaciòn y el planeamiento de este proyecto usamos la metodología ágil Scrum para desarrollar este producto en base a springs. Utilizamos Trello (Kambat).
+
+
+#### verificacion que el producto esta resolviendo los problemas
+Se hizo verificación y consultas a los usuarios y con este producto los usuarios tendran una red social unicamente destinada a cubrir los puntos de su principal  interez como son:
+- valoracion sobre farmacos nuevos
+- articulos sobre medicina natural
+- compartir casos clínicos 
+- compartir experiencias peculiares (positivas y negativas)
+
+Asimismo los médicos pueden ayudar a los estudiantes compartiendoles sus experiencias, sin exteniones de spams con temas que no tienen ninguna relación a su interez.
+
+#### como nos aseguramos que estos usuarios usen el producto
+Se invitará a usuarios a través de los grupos médicos en redes sociales como facebook, twitter, instagram, etc para que puedan ir animándose a ingresar y conocer más acerca de nuestra red social.
+
+## Conclusiones del testing con el Prototipo de alta fidelidad
+Con este testing se concluyó que los usuarios no deseaban ver el formulario de registro en una página diferente de el de Login, fue por ello que decidimos colocarlo debajo del apartado del login.
+
+## conclusiones del testing con el html
+Con este testing se concluyó que los usuarios no deseaban ver el formulario de registro en una página diferente de el de Login, fue por ello que decidimos colocarlo debajo del apartado del login. 
