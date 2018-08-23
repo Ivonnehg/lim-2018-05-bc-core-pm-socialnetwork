@@ -134,9 +134,11 @@ btnFacebook.addEventListener("click", () => {
         });
 })
 
-
 function crearElementos(userId, newPost, texto, privado) {
     console.log('entra a crear');
+    let contador = 0;
+    let nrolikes = document.createElement("span");
+    nrolikes.innerHTML = contador;
     
     var btnlike = document.createElement("input");
     btnlike.setAttribute("value", "like");
@@ -217,50 +219,55 @@ function crearElementos(userId, newPost, texto, privado) {
 
 );
 
+
     btnlike.addEventListener('click', () => {
-        console.log("diste click");
+        contador ++;
+
+        console.log(contador);
+        nrolikes.innerHTML = contador;
 
         //const newUpdate = document.getElementById(newPost);
-        const nuevoLike = {
+        // const nuevoLike = {
 
-        };
-        //agregar idusuario como clave dinamica
-        nuevoLike[userId] = 1;
+        // };
+        // //agregar idusuario como clave dinamica
+        // nuevoLike[userId] = 1;
 
-        firebase.database().ref('posts/' + newPost + "/likes/" + userId).once("value")
-            .then(function (snapshot) {//evalua si existe la ruta y lo devuelve
+        // firebase.database().ref('posts/' + newPost + "/likes/" + userId).once("value")
+        //     .then(function (snapshot) {//evalua si existe la ruta y lo devuelve
 
-                if (snapshot.exists()) {//metodo exists
-                    console.log("ya tiene like");
-                    //si el like del usuario ya existe lo elimina 
-                    firebase.database().ref().child('/user-posts/' + userId + '/' + newPost + "/likes/" + userId).remove();
-                    firebase.database().ref().child('posts/' + newPost + "/likes/" + userId).remove();
-                    btnlike.style.backgroundColor = "grey";
+        //         if (snapshot.exists()) {//metodo exists
+        //             console.log("ya tiene like");
+        //             //si el like del usuario ya existe lo elimina 
+        //             firebase.database().ref().child('/user-posts/' + userId + '/' + newPost + "/likes/" + userId).remove();
+        //             firebase.database().ref().child('posts/' + newPost + "/likes/" + userId).remove();
+        //             btnlike.style.backgroundColor = "grey";
 
 
-                    return false;
-                } else {
-                    console.log("no tiene like");
-                    //insertar like del usuario
-                    firebase.database().ref('/user-posts/' + userId + '/' + newPost + "/likes").update(nuevoLike);
-                    firebase.database().ref('/posts/' + newPost + "/likes").update(nuevoLike);
-                    btnlike.style.backgroundColor = "green";
-                    var contador = 0;
-                    document.getElementById("btnlike").onclick = function () {
-                        contador++;
-                        alert(contador);
+        //             return false;
+        //         } else {
+        //             console.log("no tiene like");
+        //             //insertar like del usuario
+        //             firebase.database().ref('/user-posts/' + userId + '/' + newPost + "/likes").update(nuevoLike);
+        //             firebase.database().ref('/posts/' + newPost + "/likes").update(nuevoLike);
+        //             btnlike.style.backgroundColor = "green";
+        //             let contador = 0;
+        //             //document.getElementById("btnlike").onclick = function () {
+        //                 contador++;
+        //                 alert(contador);
 
-                    }
-                    // return false;
-                }
+        //             }
+        //             // return false;
+        //         }
 
-            });
+        //     });
 
 
 
     });
 
     contPost.appendChild(textPost);
+    contPost.appendChild(nrolikes);
     contPost.appendChild(btnlike);    
     contPost.appendChild(btnEdit);
     contPost.appendChild(btnSave);
@@ -273,6 +280,9 @@ function crearElementos(userId, newPost, texto, privado) {
 
 function crearElementosPublic(userId, newPost, texto) {
     console.log('entra a crear public');
+    let contadorPublic = 0;
+    let likePublic = document.createElement("span");
+    likePublic.innerHTML = contadorPublic;
        
     var btnlikepublic = document.createElement("input");
     btnlikepublic.setAttribute("value", "like");
@@ -285,54 +295,53 @@ function crearElementosPublic(userId, newPost, texto) {
     textPost.setAttribute("id", newPost);
     textPost.setAttribute("class", "textPublic");
 
-    textPost.innerHTML = texto;
-
-    btnlikepublic.addEventListener('click', () => {
-        console.log("diste click");
-
+    textPost.innerHTML = texto;   
+       
         //const newUpdate = document.getElementById(newPost);
-        const nuevoLike = {
-
-        };
+        
         //agregar idusuario como clave dinamica
-        nuevoLike[userId] = 1;
+    
 
-        firebase.database().ref('posts/' + newPost + "/likes/" + userId).once("value")
-            .then(function (snapshot) {//evalua si existe la ruta y lo devuelve
+    firebase.database().ref('posts/' + newPost + "/likes/" + userId).once("value")
+        .then(function (snapshot) {//evalua si existe la ruta y lo devuelve
 
-                if (snapshot.exists()) {//metodo exists
-                    console.log("ya tiene like");
-                    //si el like del usuario ya existe lo elimina 
-                    firebase.database().ref().child('/user-posts/' + userId + '/' + newPost + "/likes/" + userId).remove();
-                    firebase.database().ref().child('posts/' + newPost + "/likes/" + userId).remove();
-                    btnlikepublic.style.backgroundColor = "grey";
-
-
-                    return false;
-                } else {
-                    console.log("no tiene like");
-                    //insertar like del usuario
-                    firebase.database().ref('/user-posts/' + userId + '/' + newPost + "/likes").update(nuevoLike);
-                    firebase.database().ref('/posts/' + newPost + "/likes").update(nuevoLike);
-                    btnlikepublic.style.backgroundColor = "green";
-                    var contador = 0;
-                    //document.getElementById("btnlikepublic").onclick = function () {
-                        contador++;
-                        alert(contador);
-
-                    //}
-                    // return false;
-                }
-
-            });
+            if (snapshot.exists()) {//metodo exists
+                console.log("ya tiene like");
+                //si el like del usuario ya existe lo elimina 
+                firebase.database().ref().child('/user-posts/' + userId + '/' + newPost + "/likes/" + userId).remove();
+                firebase.database().ref().child('posts/' + newPost + "/likes/" + userId).remove();
+                btnlikepublic.style.backgroundColor = "grey";
 
 
+                return false;
+            } else {
+                console.log("no tiene like");
+                //insertar like del usuario
+                firebase.database().ref('/user-posts/' + userId + '/' + newPost + "/likes").update(contadorPublic);
+                firebase.database().ref('/posts/' + newPost + "/likes").update(contadorPublic);
+                btnlikepublic.style.backgroundColor = "green";
+                //var contador = 0;
+                //document.getElementById("btnlikepublic").onclick = function () {
+                    // contador++;
+                    // alert(contador);
 
+                //}
+                // return false;
+            }
     });
+
+   
+    
     console.log('func: ' + muro);
     if(muro == '0'){
     contPost.appendChild(textPost);
+    contPost.appendChild(likePublic);
     contPost.appendChild(btnlikepublic);    
     posts.appendChild(contPost);
     }
+
+    btnlikepublic.addEventListener('click', () => {
+        contadorPublic++;
+        likePublic.innerHTML = contadorPublic;
+    });
 }
