@@ -24,45 +24,29 @@ const btnPublic = document.getElementById('btnpublic');
 const btnPrivate = document.getElementById('btnprivate')
 
 
-
-
-// btnPrivate.addEventListener('click', () => {
-//     // postData.status = 'private';
-//     console.log("holaaaaa");
-
-// })
-
-
-
 //es codigo relacionado al menu del css
 $(document).ready(function () {
     $('.collapsible').collapsible();
     $(".dropdown-trigger").dropdown();
-
-    console.log(document);
-
+    //console.log(document);
 });
 
 let status = ''
 btnPublic.addEventListener('click', () => {
     status = 'public';
-
     //alert("ingresa estado")
 })
 btnPrivate.addEventListener('click', () => {
     status = 'private';
-
     //alert("ingresa estado")
 })
 
 let muro = 0;
-
 //funcionabilidad de potear    
 btnPost.addEventListener('click', () => {
     if (post.value === "") {
         M.toast({ html: 'Mensaje vacio, intenta de nuevo' })
     }
-
     else {
         let userId = firebase.auth().currentUser.uid;
         console.log('estado: ' + status);
@@ -77,30 +61,30 @@ btnPost.addEventListener('click', () => {
 register.addEventListener("click", () => {
     firebase.auth().createUserWithEmailAndPassword(email.value, password.value)
         .then(function () {
-            console.log("Se creo el usuario");
+            //console.log("Se creo el usuario");
         })
         .catch(function (error) {
-            console.log(error.code, error.message);
+            //console.log(error.code, error.message);
         });
 })
 
 btnSignIn.addEventListener("click", () => {
-    console.log("hola")
+    //console.log("hola")
     firebase.auth().signInWithEmailAndPassword(emailSigned.value, passwordSigned.value)
 
         .then(function (result) {
-            console.log("Inicia sesion");
+            //console.log("Inicia sesion");
             let user = result.user;
             writeUserData(user.uid, user.displayName, '', user.email, user.photoURL)
         })
         .catch(function (error) {
-            console.log(error.code, error.message);
+            //console.log(error.code, error.message);
             let errorCode = error.code;
             if (errorCode === 'auth/wrong-password') {
-                alert('Contraseña incorrecta.');
+                M.toast({ html: 'Contraseña incorrecta, vuelve a intentarlo' })
               }
               else {
-                alert('Usuario o contraseña incorrecto');
+                M.toast({ html: 'Usuario incorrecto, vuelve a intentarlo' })
               }
         });
         
@@ -112,7 +96,6 @@ btnLogOut.addEventListener("click", () => {
             console.log("Cerro Sesion");
             login.classList.remove("hidden");
             logout.classList.add("hidden");
-
         }).catch(function (error) {
             console.log("Error al cerrar sesion")
         });
@@ -126,12 +109,10 @@ btnGoogle.addEventListener("click", () => {
             let user = result.user;
             writeUserData(user.uid, user.displayName, user.email, user.photoURL)
         }).catch(function (error) {
-
             console.log(error.code);
             console.log(error.message);
             console.log(error.email);
             console.log(error.credential);
-
         });
 })
 
@@ -157,28 +138,40 @@ btnFacebook.addEventListener("click", () => {
 function crearElementos(userId, newPost, texto, privado) {
     console.log('entra a crear');
     
-    var btnUpdate = document.createElement("input");
-    btnUpdate.setAttribute("value", "Update");
-    btnUpdate.setAttribute("type", "button");
-    btnUpdate.setAttribute("id", "btnUpdate");
-    btnUpdate.setAttribute("class", "btn waves-effect waves-light");
-    var btnDelete = document.createElement("input");
-    btnDelete.setAttribute("value", "Delete");
-    btnDelete.setAttribute("type", "button");
-    btnDelete.setAttribute("id", "btnDelete");
-    btnDelete.setAttribute("class", "btn modal-trigger");
-    btnDelete.setAttribute("data-target", "modal1");
     var btnlike = document.createElement("input");
     btnlike.setAttribute("value", "like");
     btnlike.setAttribute("type", "button");
     btnlike.setAttribute("id", "btnlike");
     btnlike.setAttribute("class", "btn waves-effect waves-light");
 
-    var contPost = document.createElement('div');
-    var textPost = document.createElement('textarea')
-    textPost.setAttribute("id", newPost);
+    var btnEdit = document.createElement("input");
+    btnEdit.setAttribute("value", "Edite");
+    btnEdit.setAttribute("type", "button");
+    btnEdit.setAttribute("id", "btnEdit");
+    btnEdit.setAttribute("class", "btn waves-effect waves-light");
 
-    textPost.innerHTML = texto;
+    var btnSave = document.createElement("input");
+    btnSave.setAttribute("value", "Save");
+    btnSave.setAttribute("type", "button");
+    btnSave.setAttribute("id", "btnSave");
+    btnSave.setAttribute("class", "btn waves-effect waves-light teal darken-4 hide");
+
+    var btnDelete = document.createElement("input");
+    btnDelete.setAttribute("value", "Delete");
+    btnDelete.setAttribute("type", "button");
+    btnDelete.setAttribute("id", "btnDelete");
+    btnDelete.setAttribute("class", "btn modal-trigger teal lighten-4");
+    btnDelete.setAttribute("data-target", "modal1");
+    
+    var contPost = document.createElement('div');
+    var textPost = document.createElement('input');
+    textPost.value = texto;
+
+    textPost.setAttribute("id", newPost);
+    textPost.setAttribute("disabled", "disabled");
+    
+
+    
 
     btnDelete.addEventListener('click', () => {
         const opcion = confirm("Estas seguro que deseas eliminar este post");
@@ -195,17 +188,34 @@ function crearElementos(userId, newPost, texto, privado) {
         }
     });
 
-    btnUpdate.addEventListener('click', () => {
+    
+    btnEdit.addEventListener('click', () => {
+        
+        textPost.removeAttribute("disabled");
+        btnEdit.classList.add("hide");
+        btnSave.classList.remove("hide");
+
+
         console.log("diste click " + newPost);
 
+        btnSave.addEventListener('click', () => {
+            
         const newUpdate = document.getElementById(newPost);
         const nuevoPost = {
             body: newUpdate.value
         };
+        updatePost(userId, newPost, nuevoPost,textPost)
+        btnEdit.classList.remove("hide");
+        btnSave.classList.add("hide");
 
+        })
+        
+    
 
-        updatePost(userId, newPost, nuevoPost)
-    });
+        
+    }
+
+);
 
     btnlike.addEventListener('click', () => {
         console.log("diste click");
@@ -251,9 +261,10 @@ function crearElementos(userId, newPost, texto, privado) {
     });
 
     contPost.appendChild(textPost);
-    contPost.appendChild(btnUpdate);
+    contPost.appendChild(btnlike);    
+    contPost.appendChild(btnEdit);
+    contPost.appendChild(btnSave);
     contPost.appendChild(btnDelete);
-    contPost.appendChild(btnlike);
     
     posts.appendChild(contPost);
 
