@@ -291,12 +291,13 @@ function crearElementosPublic(userId, newPost, texto) {
     btnlikepublic.setAttribute("class", "btn waves-effect waves-light");
 
     var contPost = document.createElement('div');
-    var textPost = document.createElement('div')
+    var textPost = document.createElement('input')
     textPost.setAttribute("id", newPost);
     textPost.setAttribute("class", "textPublic");
-
-    textPost.innerHTML = texto;   
-       
+    textPost.value = texto;
+      
+    textPost.setAttribute("id", newPost);
+    textPost.setAttribute("disabled", "disabled"); 
         //const newUpdate = document.getElementById(newPost);
         
         //agregar idusuario como clave dinamica
